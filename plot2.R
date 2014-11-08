@@ -1,13 +1,10 @@
-mydf <- read.csv("../ExData_Plotting1/household_power_consumption.txt", header=T, sep=';', na.strings="?", 
-                 nrows=2075259, check.names=F, stringsAsFactors=F, comment.char="", quote='\"')
+setwd("C:/Users/Gu-Work/Desktop/repos/ExData_Plotting1")
 
-
+mydf <- read.csv("../ExData_Plotting1/household_power_consumption.txt", header=T, sep=';', 
+                na.strings="?", nrows=2075259, check.names=F, stringsAsFactors=F, comment.char="", quote='\"')
 
 mydf$Date <- strptime(mydf$Date, "%d/%m/%Y")
-
 mydf$Date <- as.Date(mydf$Date)
-
-
 
 mydfsub <- subset(mydf, Date >= "2007-02-01" & Date <= "2007-02-02")
 
