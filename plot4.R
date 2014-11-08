@@ -17,11 +17,11 @@ mydfsub$Sub_metering_1 <- as.numeric(mydfsub$Sub_metering_1)
 mydfsub$Sub_metering_2 <- as.numeric(mydfsub$Sub_metering_2)
 mydfsub$Sub_metering_3 <- as.numeric(mydfsub$Sub_metering_3)
 
-## Converting dates
+## casting dates
 datetime <- paste(as.Date(mydfsub$Date), mydfsub$Time)
 mydfsub$Datetime <- as.POSIXct(datetime)
 
-# Plot
+## plot4
 par(mfrow=c(2,2), mar=c(4,4,2,1), oma=c(0,0,2,0))
 with(mydfsub, {
 
