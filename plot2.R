@@ -1,3 +1,4 @@
+
 setwd("C:/Users/Gu-Work/Desktop/repos/ExData_Plotting1")
 
 mydf <- read.csv("../ExData_Plotting1/household_power_consumption.txt", header=T, sep=';', 
@@ -16,16 +17,12 @@ mydfsub$Sub_metering_1 <- as.numeric(mydfsub$Sub_metering_1)
 mydfsub$Sub_metering_2 <- as.numeric(mydfsub$Sub_metering_2)
 mydfsub$Sub_metering_3 <- as.numeric(mydfsub$Sub_metering_3)
 
-
-## Converting dates
+## casting dates
 datetime <- paste(as.Date(mydfsub$Date), mydfsub$Time)
 mydfsub$Datetime <- as.POSIXct(datetime)
 
-
-
 ## plot 2
 plot(mydfsub$Datetime, mydfsub$Global_active_power, type="l", xlab="", ylab="Global Active Power (kilowatts)")
-
 
 dev.copy(png, file="plot2.png", height=480, width=480)
 dev.off()
