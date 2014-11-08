@@ -1,13 +1,11 @@
 
-mydf <- read.csv("../ExData_Plotting1/household_power_consumption.txt", header=T, sep=';', na.strings="?", 
-                 nrows=2075259, check.names=F, stringsAsFactors=F, comment.char="", quote='\"')
+setwd("C:/Users/Gu-Work/Desktop/repos/ExData_Plotting1")
 
+mydf <- read.csv("../ExData_Plotting1/household_power_consumption.txt", header=T, sep=';',
+                na.strings="?", nrows=2075259, check.names=F, stringsAsFactors=F, comment.char="", quote='\"')
 
 mydf$Date <- strptime(mydf$Date, "%d/%m/%Y")
-
 mydf$Date <- as.Date(mydf$Date)
-
-
 
 mydfsub <- subset(mydf, Date >= "2007-02-01" & Date <= "2007-02-02")
 
@@ -19,26 +17,26 @@ mydfsub$Sub_metering_1 <- as.numeric(mydfsub$Sub_metering_1)
 mydfsub$Sub_metering_2 <- as.numeric(mydfsub$Sub_metering_2)
 mydfsub$Sub_metering_3 <- as.numeric(mydfsub$Sub_metering_3)
 
-
 ## Converting dates
 datetime <- paste(as.Date(mydfsub$Date), mydfsub$Time)
 mydfsub$Datetime <- as.POSIXct(datetime)
 
-
-
+# Plot
 par(mfrow=c(2,2), mar=c(4,4,2,1), oma=c(0,0,2,0))
 with(mydfsub, {
+
   plot(Global_active_power~Datetime, type="l", ylab="Global Active Power (kilowatts)", xlab="")
+
   plot(Voltage~Datetime, type="l", ylab="Voltage (volt)", xlab="Datetime")
+
   plot(Sub_metering_1~Datetime, type="l", ylab="Energy sub metering", xlab="")
   lines(Sub_metering_2~Datetime,col='Red')
   lines(Sub_metering_3~Datetime,col='Blue')
-  
   legend("topright", col=c("black", "red", "blue"), lty=1, lwd=2, legend=c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"))
+
   plot(Global_reactive_power~Datetime, type="l", ylab="Global Reactive Power (kilowatts)",xlab="Datetime")
+
 })
-
-
 
 dev.copy(png, file="plot4.png", height=1200, width=1200)
 dev.off()
