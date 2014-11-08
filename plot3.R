@@ -1,12 +1,10 @@
-mydf <- read.csv("../ExData_Plotting1/household_power_consumption.txt", header=T, sep=';', na.strings="?", 
-                 nrows=2075259, check.names=F, stringsAsFactors=F, comment.char="", quote='\"')
+setwd("C:/Users/Gu-Work/Desktop/repos/ExData_Plotting1")
 
+mydf <- read.csv("../ExData_Plotting1/household_power_consumption.txt", header=T, sep=';',
+                na.strings="?", nrows=2075259, check.names=F, stringsAsFactors=F, comment.char="", quote='\"')
 
 mydf$Date <- strptime(mydf$Date, "%d/%m/%Y")
-
 mydf$Date <- as.Date(mydf$Date)
-
-
 
 mydfsub <- subset(mydf, Date >= "2007-02-01" & Date <= "2007-02-02")
 
@@ -18,11 +16,9 @@ mydfsub$Sub_metering_1 <- as.numeric(mydfsub$Sub_metering_1)
 mydfsub$Sub_metering_2 <- as.numeric(mydfsub$Sub_metering_2)
 mydfsub$Sub_metering_3 <- as.numeric(mydfsub$Sub_metering_3)
 
-
 ## Converting dates
 datetime <- paste(as.Date(mydfsub$Date), mydfsub$Time)
 mydfsub$Datetime <- as.POSIXct(datetime)
-
 
 ## Plot 3
 with(mydfsub, {
@@ -31,7 +27,6 @@ with(mydfsub, {
   lines(Sub_metering_3~Datetime,col='Blue')
   legend("topright", c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"), lty=, lwd=2.5, col=c("black", "red", "blue"), bty="o") 
 })
-
 
 dev.copy(png, file="plot3.png", height=480, width=480)
 dev.off()
